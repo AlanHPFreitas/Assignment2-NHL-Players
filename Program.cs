@@ -18,5 +18,13 @@ namespace Assignment2_NHL_Players
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
+    public class Player
+    {
+    public string PlayerName { get; set; }
+    public string Team { get; set; }
+    public string Pos { get; set; }
+    public int GP { get; set; }  // Games Played
+    public int G { get; set; }   // Goals
+    public int A { get; set; }   // Assists
     }
 }
