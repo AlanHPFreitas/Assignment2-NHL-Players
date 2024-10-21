@@ -9,4 +9,7 @@ namespace Assignment2_NHL_Players.Models
     internal class PlayerStat
     {
     }
+
+
+
 }

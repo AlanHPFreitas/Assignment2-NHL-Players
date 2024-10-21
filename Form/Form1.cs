@@ -16,5 +16,14 @@ namespace Assignment2_NHL_Players
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
+
+
+
+
 }
