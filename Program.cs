@@ -1,8 +1,5 @@
 ﻿using Assignment2_NHL_Players.Forms;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Assignment2_NHL_Players
@@ -10,7 +7,7 @@ namespace Assignment2_NHL_Players
     internal static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// O ponto de entrada da aplicacao
         /// </summary>
         [STAThread]
         static void Main()

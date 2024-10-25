@@ -21,7 +21,7 @@ namespace Assignment2_NHL_Players.Forms
             
             LoadDataStart();
 
-            //string filePath = @"..\..\data\NHL Player Stats 2017-18.csv"; // ou seu caminho
+            //string filePath = @"..\..\data\NHL Player Stats 2017-18.csv"; 
             //string cwd = System.IO.Directory.GetCurrentDirectory();
             //if (!File.Exists(filePath))
             //{
@@ -97,33 +97,33 @@ namespace Assignment2_NHL_Players.Forms
 
         private void InitializeDataGridView()
         {
-            dgvPlayerStats.AutoGenerateColumns = true;  // Automatically generate columns based on data
-            dgvPlayerStats.AllowUserToAddRows = false;  // Prevent users from adding rows
-            dgvPlayerStats.AllowUserToDeleteRows = false;  // Prevent users from deleting rows
-            dgvPlayerStats.ReadOnly = true;  // Make the DataGridView read-only
-            dgvPlayerStats.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  // Select full rows only
-            dgvPlayerStats.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;  // Fill the columns to fit the control
+            dgvPlayerStats.AutoGenerateColumns = true;  // Essa parte vai gerar colunas baseadas nos dados
+            dgvPlayerStats.AllowUserToAddRows = false;  // Aqui vai impedir que os usuàrios venham a adicionar colunas.
+            dgvPlayerStats.AllowUserToDeleteRows = false;  // Não permite que os usuários  excluam colunas
+            dgvPlayerStats.ReadOnly = true;  // Faz com que o  DataGridView (o que eu usei para mostrar a imagem da tabela) seja somente para leitura
+            dgvPlayerStats.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  // Seleciona somente linhas completas
+            dgvPlayerStats.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;  // Seleciona somente colunas completas
         }
 
         private void TxtSort_TextChanged(object sender, EventArgs e)
         {
-            UpdateDataGridView(); // Chama o método para atualizar o DataGridView quando o texto de ordenação muda
+            UpdateDataGridView(); // Aqui e onde é chamdo o método para atualizar o DataGridView quando o texto de ordenação muda
         }
 
         private void TxtFilter_TextChanged(object sender, EventArgs e)
         {
-            UpdateDataGridView(); // Chama o método para atualizar o DataGridView quando o texto de filtro muda
+            UpdateDataGridView(); // Aqui e onde é chamado o método para  atualizar o DataGridView quando o texto de filtro muda
         }
 
         private void UpdateDataGridView()
         {
-            string filter = TxtFilter.Text; // Obtém o texto do filtro
-            string sort = TxtSort.Text; // Obtém o texto da ordenação
+            string filter = TxtFilter.Text; // Aqui é onde obtemos o texto do filtro
+            string sort = TxtSort.Text; // Aqui é onde obtemos o texto da ordenação
             string filePath = @"..\..\data\NHL Player Stats 2017-18.csv";
             var playerService = new PlayerService();
             var listPlayerStats = playerService.LoadPlayerStats(filePath);
 
-            // Filtra e ordena a lista de jogadores com base na entrada
+            // Aqui é onde é ordena a lista de jogadores com base na entrada
             var filteredAndSortedData = ApplyFilterAndSort(listPlayerStats, filter, sort);
 
             // Atualiza o DataGridView com os dados filtrados e ordenados

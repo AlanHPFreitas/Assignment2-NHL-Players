@@ -16,30 +16,30 @@ namespace Assignment2_NHL_Players.Services
         /// <returns>A list of PlayerStats objects.</returns>
         public List<PlayerStats> LoadPlayerStats(string filePath)
         {
-            // Initialize a list to hold player statistics
+            // Inicializar uma lista para guardar as estatísticas dos jogadores
             var playerStats = new List<PlayerStats>();
 
             try
             {
 
-                // Read all lines from the file, skipping the header row
+                // Lê todas as linhas do ficheiro, pulando a linha do cabeçalho
                 var lines = File.ReadAllLines(filePath).Skip(1);
 
                 foreach (var line in lines)
                 {
-                    // Split each line by comma to get the individual fields
+                    // Dividir cada linha por vírgula para obter os campos individuais
                     var fields = line.Split(',');
 
-                    // Ensure that the correct number of fields are present
+                    // Certifica de que o número correto de campos está presente
                     if (fields.Length < 21)
                     {
-                        Console.WriteLine($"Linha inválida: {line}");
-                        continue; // Skip this line and continue to the next
+                        Console.WriteLine($"Invalid line: {line}");
+                        continue; // Saltar esta linha e passar à seguinte
                     }
                     if (fields.Length > 21)
                     {
-                        Console.WriteLine($"Linha inválida: {line}");
-                        continue; // Skip this line and continue to the next
+                        Console.WriteLine($"Invalid line: {line}");
+                        continue; // Saltar esta linha e passar à seguinte
                     }
                     try
                     {
@@ -68,7 +68,7 @@ namespace Assignment2_NHL_Players.Services
                             ShiftsGP = double.Parse(fields[19]),
                             FOWPercentage = double.Parse(fields[20])
                         };
-                        // Add the created object to the list
+                        // Adicionar o objeto criado à lista
                         playerStats.Add(playerStat);
                     }
                     catch (Exception e) 
@@ -80,19 +80,19 @@ namespace Assignment2_NHL_Players.Services
             }
             catch (FileNotFoundException ex)
             {
-                Console.WriteLine($"Arquivo não encontrado: {ex.Message}");
+                Console.WriteLine($"File not found: {ex.Message}");
             }
             catch (IOException ex)
             {
-                Console.WriteLine($"Erro ao ler o arquivo: {ex.Message}");
+                Console.WriteLine($"Error reading the file: {ex.Message}");
             }
             catch (FormatException ex)
             {
-                Console.WriteLine($"Erro ao converter dados: {ex.Message}");
+                Console.WriteLine($"Error reading the file {ex.Message}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ocorreu um erro inesperado: {ex.Message}");
+                Console.WriteLine($"An unexpected error has occurred: {ex.Message}");
             }
 
             return playerStats;

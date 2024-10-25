@@ -60,9 +60,9 @@ namespace Assignment2_NHL_Players.Controllers
 
         private bool Compare(PlayerStats p, string field, string op, string value)
         {
-            // Logic to dynamically compare player fields with given value
+            // Lógica para comparar dinamicamente os campos do jogador com um determinado valor
             var playerValue = GetFieldValue(p, field);
-            var numericValue = double.Parse(value); // Handles both int and double
+            var numericValue = double.Parse(value); // Trata tanto int como double
 
             return op switch
             {

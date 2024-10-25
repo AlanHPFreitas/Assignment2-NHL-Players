@@ -23,8 +23,8 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// Método necessário para o suporte do Designer - não modifique
+        /// o conteúdo deste método com o editor de código.
         /// </summary>
         private void InitializeComponent()
         {
@@ -37,28 +37,29 @@
             // dgvPlayerStats
             // 
             this.dgvPlayerStats.AccessibleName = "dgvPlayerStats";
+            this.dgvPlayerStats.AllowUserToOrderColumns = true;
             this.dgvPlayerStats.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvPlayerStats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPlayerStats.Location = new System.Drawing.Point(12, 12);
+            this.dgvPlayerStats.Location = new System.Drawing.Point(12, 51);
             this.dgvPlayerStats.Name = "dgvPlayerStats";
             this.dgvPlayerStats.RowHeadersWidth = 51;
             this.dgvPlayerStats.RowTemplate.Height = 24;
-            this.dgvPlayerStats.Size = new System.Drawing.Size(582, 426);
+            this.dgvPlayerStats.Size = new System.Drawing.Size(776, 387);
             this.dgvPlayerStats.TabIndex = 0;
             // 
             // TxtSort
             // 
-            this.TxtSort.Location = new System.Drawing.Point(630, 158);
+            this.TxtSort.Location = new System.Drawing.Point(445, 12);
             this.TxtSort.Name = "TxtSort";
-            this.TxtSort.Size = new System.Drawing.Size(100, 22);
+            this.TxtSort.Size = new System.Drawing.Size(160, 22);
             this.TxtSort.TabIndex = 1;
             this.TxtSort.Text = "G des";
             // 
             // TxtFilter
             // 
-            this.TxtFilter.Location = new System.Drawing.Point(630, 208);
+            this.TxtFilter.Location = new System.Drawing.Point(636, 12);
             this.TxtFilter.Name = "TxtFilter";
-            this.TxtFilter.Size = new System.Drawing.Size(100, 22);
+            this.TxtFilter.Size = new System.Drawing.Size(152, 22);
             this.TxtFilter.TabIndex = 2;
             this.TxtFilter.Text = "G >= 50";
             // 
