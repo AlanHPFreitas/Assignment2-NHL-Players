@@ -6,6 +6,7 @@ using Assignment2_NHL_Players.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Linq.Dynamic.Core;
 
 namespace Assignment2_NHL_Players.Forms
 {
@@ -107,12 +108,14 @@ namespace Assignment2_NHL_Players.Forms
 
         private void TxtSort_TextChanged(object sender, EventArgs e)
         {
+            Console.WriteLine("Text changed");
             UpdateDataGridView(); // Aqui e onde é chamdo o método para atualizar o DataGridView quando o texto de ordenação muda
         }
 
         private void TxtFilter_TextChanged(object sender, EventArgs e)
         {
-            UpdateDataGridView(); // Aqui e onde é chamado o método para  atualizar o DataGridView quando o texto de filtro muda
+            Console.WriteLine("Text changed too");
+            UpdateDataGridView(); // Aqui e onde é chamado o método para atualizar o DataGridView quando o texto de filtro muda
         }
 
         private void UpdateDataGridView()
@@ -134,8 +137,35 @@ namespace Assignment2_NHL_Players.Forms
         {
             var query = playerStats.AsQueryable();
 
-            // Aplica o filtro
-            //if (!string.IsNullOrWhiteSpace(filter))
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                // Converte o filtro para o formato esperado
+                var conditions = filter.Split(',')
+                                       .Select(cond => cond.Trim())
+                                       .ToArray();
+                // Constrói a string do filtro combinada
+                string combinedFilter = string.Join(" AND ", conditions);
+
+                // Aplica o filtro dinâmico ao IQueryable
+                query = query.Where(combinedFilter);
+            }
+
+            if (!string.IsNullOrWhiteSpace(sort))
+            {
+                // Remove espaços em branco e interpreta múltiplos campos de ordenação
+                var sortExpressions = sort.Split(',')
+                                          .Select(s => s.Trim())
+                                          .ToArray();
+
+                // Combina as expressões de ordenação em uma única string para Dynamic LINQ
+                string combinedSort = string.Join(", ", sortExpressions);
+
+                // Aplica a ordenação dinâmica ao IQueryable
+                query = query.OrderBy(combinedSort);
+            }
+
+            //Aplica o filtro
+            //    if (!string.IsNullOrWhiteSpace(filter))
             //{
             //    // Aqui você deve implementar a lógica para interpretar e aplicar o filtro
             //    // Isso pode incluir parsing do texto de filtro e aplicação de condições
@@ -155,6 +185,16 @@ namespace Assignment2_NHL_Players.Forms
             return query;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("button changed");
+            UpdateDataGridView();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Text changed");
+        }
     }
 }
 
