@@ -16,7 +16,6 @@ namespace Assignment2_NHL_Players.Controllers
         {
             _playerService = new PlayerService();
             _players = _playerService.LoadPlayerStats(filePath);
-            //_playerService = new PlayerService();
             
         }
 
@@ -24,36 +23,36 @@ namespace Assignment2_NHL_Players.Controllers
         {
             var query = _players.AsQueryable();
 
-            //// Apply filters
-            //if (!string.IsNullOrWhiteSpace(filter))
-            //{
-            //    var filterExpressions = filter.Split(',');
-            //    foreach (var expression in filterExpressions)
-            //    {
-            //        var parts = expression.Trim().Split(' ');
-            //        var field = parts[0];
-            //        var op = parts[1];
-            //        var value = parts[2];
+            // Apply filters
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                var filterExpressions = filter.Split(',');
+                foreach (var expression in filterExpressions)
+                {
+                    var parts = expression.Trim().Split(' ');
+                    var field = parts[0];
+                    var op = parts[1];
+                    var value = parts[2];
 
-            //        query = query.Where(p => Compare(p, field, op, value));
-            //    }
-            //}
+                    query = query.Where(p => Compare(p, field, op, value));
+                }
+            }
 
-            //// Apply sorting
-            //if (!string.IsNullOrWhiteSpace(sort))
-            //{
-            //    var sortExpressions = sort.Split(',');
-            //    foreach (var expression in sortExpressions)
-            //    {
-            //        var parts = expression.Trim().Split(' ');
-            //        var field = parts[0];
-            //        var direction = parts[1];
+            // Apply sorting
+            if (!string.IsNullOrWhiteSpace(sort))
+            {
+                var sortExpressions = sort.Split(',');
+                foreach (var expression in sortExpressions)
+                {
+                    var parts = expression.Trim().Split(' ');
+                    var field = parts[0];
+                    var direction = parts[1];
 
-            //        query = direction.ToLower() == "asc"
-            //            ? query.OrderBy(p => GetFieldValue(p, field))
-            //            : query.OrderByDescending(p => GetFieldValue(p, field));
-            //    }
-            //}
+                    query = direction.ToLower() == "asc"
+                        ? query.OrderBy(p => GetFieldValue(p, field))
+                        : query.OrderByDescending(p => GetFieldValue(p, field));
+                }
+            }
 
             return query.ToList();
         }
@@ -66,11 +65,11 @@ namespace Assignment2_NHL_Players.Controllers
 
             return op switch
             {
-                ">" => (double)playerValue > numericValue,
-                ">=" => (double)playerValue >= numericValue,
-                "<" => (double)playerValue < numericValue,
-                "<=" => (double)playerValue <= numericValue,
-                "==" => (double)playerValue == numericValue,
+                ">" => Convert.ToDouble(playerValue) > numericValue,
+                ">=" => Convert.ToDouble(playerValue) >= numericValue,
+                "<" => Convert.ToDouble(playerValue) < numericValue,
+                "<=" => Convert.ToDouble(playerValue) <= numericValue,
+                "==" => Convert.ToDouble(playerValue) == numericValue,
                 _ => false
             };
         }
@@ -78,6 +77,7 @@ namespace Assignment2_NHL_Players.Controllers
         private object GetFieldValue(PlayerStats p, string field)
         {
             return typeof(PlayerStats).GetProperty(field)?.GetValue(p);
+
         }
     }
 }
