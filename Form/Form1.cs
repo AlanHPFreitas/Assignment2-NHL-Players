@@ -6,6 +6,7 @@ using Assignment2_NHL_Players.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Linq.Dynamic.Core;
 
 namespace Assignment2_NHL_Players.Forms
 {
@@ -19,37 +20,14 @@ namespace Assignment2_NHL_Players.Forms
             InitializeComponent();
             _controller = new AppController(@"..\..\data\NHL Player Stats 2017-18.csv");
             
-            LoadDataStart();
-
-            //string filePath = @"..\..\data\NHL Player Stats 2017-18.csv"; 
-            //string cwd = System.IO.Directory.GetCurrentDirectory();
-            //if (!File.Exists(filePath))
-            //{
-            //    MessageBox.Show("O arquivo não foi encontrado: " + filePath);
-            //    MessageBox.Show("cwd: " + cwd);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("O arquivo  foi encontrado: " + filePath);
-            //    MessageBox.Show("cwd: " + cwd);
-
-            //}
-
-
-
+            LoadDataStart();           
         }
 
         private void LoadDataStart()
         {
             var players = _controller.GetFilteredAndSortedPlayers("","");
-
-          
-
             dgvPlayerStats.DataSource = players;
-
-           
         }
-
 
         private void LoadData()
         {
@@ -61,8 +39,6 @@ namespace Assignment2_NHL_Players.Forms
             }
 
             dgvPlayerStats.DataSource = players;
-
-           
         }
 
         //private void BbtnUpdate_Click(object sender, EventArgs e)
@@ -105,37 +81,55 @@ namespace Assignment2_NHL_Players.Forms
             dgvPlayerStats.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;  // Seleciona somente colunas completas
         }
 
-        private void TxtSort_TextChanged(object sender, EventArgs e)
-        {
-            UpdateDataGridView(); // Aqui e onde é chamdo o método para atualizar o DataGridView quando o texto de ordenação muda
-        }
 
-        private void TxtFilter_TextChanged(object sender, EventArgs e)
-        {
-            UpdateDataGridView(); // Aqui e onde é chamado o método para  atualizar o DataGridView quando o texto de filtro muda
-        }
+        //private void UpdateDataGridView()
+        //{
+        //    string filter = TxtFilter.Text; // Aqui é onde obtemos o texto do filtro
+        //    string sort = TxtSort.Text; // Aqui é onde obtemos o texto da ordenação
+        //    string filePath = @"..\..\data\NHL Player Stats 2017-18.csv";
+        //    var playerService = new PlayerService();
+        //    var listPlayerStats = playerService.LoadPlayerStats(filePath);
 
-        private void UpdateDataGridView()
-        {
-            string filter = TxtFilter.Text; // Aqui é onde obtemos o texto do filtro
-            string sort = TxtSort.Text; // Aqui é onde obtemos o texto da ordenação
-            string filePath = @"..\..\data\NHL Player Stats 2017-18.csv";
-            var playerService = new PlayerService();
-            var listPlayerStats = playerService.LoadPlayerStats(filePath);
+        //    // Aqui é onde é ordena a lista de jogadores com base na entrada
+        //    var filteredAndSortedData = ApplyFilterAndSort(listPlayerStats, filter, sort);
 
-            // Aqui é onde é ordena a lista de jogadores com base na entrada
-            var filteredAndSortedData = ApplyFilterAndSort(listPlayerStats, filter, sort);
-
-            // Atualiza o DataGridView com os dados filtrados e ordenados
-            dgvPlayerStats.DataSource = filteredAndSortedData;
-        }
+        //    // Atualiza o DataGridView com os dados filtrados e ordenados
+        //    dgvPlayerStats.DataSource = filteredAndSortedData;
+        //}
 
         private IEnumerable<PlayerStats> ApplyFilterAndSort(IEnumerable<PlayerStats> playerStats, string filter, string sort)
         {
             var query = playerStats.AsQueryable();
 
-            // Aplica o filtro
-            //if (!string.IsNullOrWhiteSpace(filter))
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                // Converte o filtro para o formato esperado
+                var conditions = filter.Split(',')
+                                       .Select(cond => cond.Trim())
+                                       .ToArray();
+                // Constrói a string do filtro combinada
+                string combinedFilter = string.Join(" AND ", conditions);
+
+                // Aplica o filtro dinâmico ao IQueryable
+                query = query.Where(combinedFilter);
+            }
+
+            if (!string.IsNullOrWhiteSpace(sort))
+            {
+                // Remove espaços em branco e interpreta múltiplos campos de ordenação
+                var sortExpressions = sort.Split(',')
+                                          .Select(s => s.Trim())
+                                          .ToArray();
+
+                // Combina as expressões de ordenação em uma única string para Dynamic LINQ
+                string combinedSort = string.Join(", ", sortExpressions);
+
+                // Aplica a ordenação dinâmica ao IQueryable
+                query = query.OrderBy(combinedSort);
+            }
+
+            //Aplica o filtro
+            //    if (!string.IsNullOrWhiteSpace(filter))
             //{
             //    // Aqui você deve implementar a lógica para interpretar e aplicar o filtro
             //    // Isso pode incluir parsing do texto de filtro e aplicação de condições
@@ -153,6 +147,13 @@ namespace Assignment2_NHL_Players.Forms
             //}
 
             return query;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("button changed");
+            //UpdateDataGridView();
+            LoadData();
         }
 
     }
