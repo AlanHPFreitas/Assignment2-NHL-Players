@@ -16,29 +16,29 @@ namespace Assignment2_NHL_Players.Services
         /// <returns>A list of PlayerStats objects.</returns>
         public List<PlayerStats> LoadPlayerStats(string filePath)
         {
-            // Inicializar uma lista para guardar as estatísticas dos jogadores
+            // Initialize a list to store player statistics
             var playerStats = new List<PlayerStats>();
 
             try
             {
 
-                // Lê todas as linhas do ficheiro, pulando a linha do cabeçalho
+                // Reads all the lines in the file, skipping the header line
                 var lines = File.ReadAllLines(filePath).Skip(1);
 
                 foreach (var line in lines)
                 {
-                    // Dividir cada linha por vírgula para obter os campos individuais
+                    // Divide each line by a comma to get the individual fields
                     var fields = line.Split(',');
 
-                    // Certifica de que o número correto de campos está presente
+                    // Certifies that the correct number of fields is present
                     if (fields.Length < 21)
                     {
                         Console.WriteLine($"Invalid line: {line}");
-                        continue; // Saltar esta linha e passar à seguinte
+                        continue; // Skip this line and go to the next one
                     } else if (fields.Length > 24)
                     {
                         Console.WriteLine($"Invalid line: {line}");
-                        continue; // Saltar esta linha e passar à seguinte
+                        continue; // Skip this line and go to the next one
                     }
                     else if (fields.Length == 22)
                     {
@@ -70,7 +70,7 @@ namespace Assignment2_NHL_Players.Services
                                 ShiftsGP = double.Parse(fields[20]),
                                 FOWPercentage = double.Parse(fields[21])
                             };
-                            // Adicionar o objeto criado à lista
+                            // Add the created object to the list
                             playerStats.Add(playerStat);
                         }
                         catch (Exception e)
@@ -108,7 +108,7 @@ namespace Assignment2_NHL_Players.Services
                                 ShiftsGP = double.Parse(fields[21]),
                                 FOWPercentage = double.Parse(fields[22])
                             };
-                            // Adicionar o objeto criado à lista
+                            // Add the created object to the list
                             playerStats.Add(playerStat);
                         }
                         catch (Exception e)
@@ -146,7 +146,7 @@ namespace Assignment2_NHL_Players.Services
                                 ShiftsGP = double.Parse(fields[22]),
                                 FOWPercentage = double.Parse(fields[23])
                             };
-                            // Adicionar o objeto criado à lista
+                            // Add the created object to the list
                             playerStats.Add(playerStat);
                         }
                         catch (Exception e)
@@ -184,7 +184,7 @@ namespace Assignment2_NHL_Players.Services
                                 ShiftsGP = double.Parse(fields[19]),
                                 FOWPercentage = double.Parse(fields[20])
                             };
-                            // Adicionar o objeto criado à lista
+                            // Add the created object to the list
                             playerStats.Add(playerStat);
                         }
                         catch (Exception e)
