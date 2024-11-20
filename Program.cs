@@ -27,4 +27,5 @@ namespace Assignment2_NHL_Players
     public int G { get; set; }   // Goals
     public int A { get; set; }   // Assists
     }
+        // User test
 }
