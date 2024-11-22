@@ -36,6 +36,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.filterErrorTxt = new System.Windows.Forms.Label();
             this.sortErrorTxt = new System.Windows.Forms.Label();
+
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayerStats)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             this.TxtSort.Name = "TxtSort";
             this.TxtSort.Size = new System.Drawing.Size(419, 61);
             this.TxtSort.TabIndex = 1;
-            this.TxtSort.Text = "G des";
+            this.TxtSort.Text = "G desc";
             // 
             // TxtFilter
             // 
@@ -76,14 +77,14 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(1671, 8);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(307, 116);
             this.button1.TabIndex = 3;
-            this.button1.Text = "Filter";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Text = "Apply";
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
@@ -131,7 +132,7 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(2274, 675);
@@ -143,9 +144,9 @@
             this.Controls.Add(this.TxtFilter);
             this.Controls.Add(this.TxtSort);
             this.Controls.Add(this.dgvPlayerStats);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayerStats)).EndInit();
             this.ResumeLayout(false);

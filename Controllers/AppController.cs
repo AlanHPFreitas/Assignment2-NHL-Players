@@ -81,6 +81,7 @@ namespace Assignment2_NHL_Players.Controllers
 
             // Logic to dynamically compare player fields with a given value
             var playerValue = GetFieldValue(p, field, filterErrorTxt);
+
             var numericValue = double.Parse(value); // Handles both int and double
 
             return op switch

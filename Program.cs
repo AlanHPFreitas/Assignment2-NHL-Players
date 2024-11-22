@@ -7,7 +7,7 @@ namespace Assignment2_NHL_Players
     internal static class Program
     {
         /// <summary>
-        /// O ponto de entrada da aplicacao
+        /// The application's entry point
         /// </summary>
         [STAThread]
         static void Main()
@@ -17,5 +17,6 @@ namespace Assignment2_NHL_Players
             Application.Run(new Form1());
         }
     }
+        // User test
 }
 
