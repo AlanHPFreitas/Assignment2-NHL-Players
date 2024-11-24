@@ -25,13 +25,13 @@ namespace Assignment2_NHL_Players.Forms
 
         private void LoadDataStart()
         {
-            var players = _controller.GetFilteredAndSortedPlayers("","");
+            var players = _controller.GetFilteredAndSortedPlayers("","", filterErrorTxt, sortErrorTxt);
             dgvPlayerStats.DataSource = players;
         }
 
         private void LoadData()
         {
-            var players = _controller.GetFilteredAndSortedPlayers(TxtFilter.Text, TxtSort.Text);
+            var players = _controller.GetFilteredAndSortedPlayers(TxtFilter.Text, TxtSort.Text, filterErrorTxt, sortErrorTxt);
 
             foreach (PlayerStats p in players)
             {
@@ -151,7 +151,8 @@ namespace Assignment2_NHL_Players.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("button changed");
+            filterErrorTxt.Text = "";
+            sortErrorTxt.Text = "";
             //UpdateDataGridView();
             LoadData();
         }
@@ -159,6 +160,16 @@ namespace Assignment2_NHL_Players.Forms
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void errorBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            filterErrorTxt.Text = "Errorrrrr";
         }
     }
 }
